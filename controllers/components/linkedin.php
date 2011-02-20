@@ -23,13 +23,21 @@ class LinkedinComponent extends Object {
 		$options = Configure::read('linkedin');
 		$options['callbackUrl'] = Router::url(null, true) . '?' . LinkedIn::_GET_TYPE . '=initiate&' . LinkedIn::_GET_RESPONSE . '=1';
 		$this->linkedin = new LinkedIn($options);
+		$this->linkedin->setResponseFormat(LinkedIn::_RESPONSE_JSON);
 		if (!empty($this->settings['token'])) {
 			$this->linkedin->setTokenAccess($this->settings['token']);
 		}
 	}
 	
 	function response($response) {
-		return ($response['success']) ? $response['linkedin'] : false;
+		if (!$response['success'])
+			return false;
+		
+		$response = $response['linkedin'];
+		if ($this->linkedin->getResponseFormat() == LinkedIn::_RESPONSE_JSON || $this->linkedin->getResponseFormat() == LinkedIn::_RESPONSE_JSONP)
+			$response = json_decode($response, true);
+		
+		return $response;
 	}
 	
 	/**
