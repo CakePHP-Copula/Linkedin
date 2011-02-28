@@ -2,7 +2,6 @@
 /**
 * LinkedIn Component
 */
-App::import('vendor', 'Linkedin.linkedin');
 class LinkedinComponent extends Object {
 	
 	var $components = array('Session');
@@ -20,7 +19,8 @@ class LinkedinComponent extends Object {
 	}
 	
 	function startup(&$controller) {
-		$options = Configure::read('linkedin');
+		App::import('vendor', 'Linkedin.linkedin');
+		$options = $this->settings;
 		$options['callbackUrl'] = Router::url(null, true) . '?' . LinkedIn::_GET_TYPE . '=initiate&' . LinkedIn::_GET_RESPONSE . '=1';
 		$this->linkedin = new LinkedIn($options);
 		$this->linkedin->setResponseFormat(LinkedIn::_RESPONSE_JSON);
@@ -30,8 +30,10 @@ class LinkedinComponent extends Object {
 	}
 	
 	function response($response) {
-		if (!$response['success'])
+		$this->response = $response;
+		if (!$response['success']) {
 			return false;
+		}
 		
 		$response = $response['linkedin'];
 		if ($this->linkedin->getResponseFormat() == LinkedIn::_RESPONSE_JSON || $this->linkedin->getResponseFormat() == LinkedIn::_RESPONSE_JSONP)
