@@ -20,7 +20,7 @@ class LinkedinComponent extends Object {
 	}
 	
 	function startup(&$controller) {
-		$options = Configure::read('linkedin');
+		$options = $this->settings;
 		$options['callbackUrl'] = Router::url(null, true) . '?' . LinkedIn::_GET_TYPE . '=initiate&' . LinkedIn::_GET_RESPONSE . '=1';
 		$this->linkedin = new LinkedIn($options);
 		$this->linkedin->setResponseFormat(LinkedIn::_RESPONSE_JSON);
