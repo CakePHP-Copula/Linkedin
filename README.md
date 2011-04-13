@@ -2,18 +2,18 @@
 
 1. Download / clone the plugin to _plugins/linkedin_
 
-2. Add the following code to your bootstrap.php (or something)
+2. Add the component: 
 
-<pre><code>Configure::write('linkedin', array(
-	'appKey'	=> '',
-	'appSecret'	=> '',
-));</code></pre>
+```var $components = array(
+	'Linkedin.Linkedin' => array(
+		'appKey' => '--your api key--',
+		'appSecret' => '--your secret code--',
+	)
+);```
 
-3. Add the component: `var $components = array('Linkedin.Linkedin')`
+3. Create a login action in the controller to let people allow your app access to their LinkedIn
 
-4. Create a login action in the controller to let people allow your app access to their LinkedIn
-
-5. Once they're authenticated, call queries on the component (or the attached vendor attribute)
+4. Once they're authenticated, call queries on the component (or the attached vendor attribute)
 
 ### Check Logged-in Status
 
