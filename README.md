@@ -4,12 +4,12 @@
 
 2. Add the component: 
 
-```var $components = array(
+<pre><code>var $components = array(
 	'Linkedin.Linkedin' => array(
 		'appKey' => '--your api key--',
 		'appSecret' => '--your secret code--',
 	)
-);```
+);</code></pre>
 
 3. Create a login action in the controller to let people allow your app access to their LinkedIn
 
