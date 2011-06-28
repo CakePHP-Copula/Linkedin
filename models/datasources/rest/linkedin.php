@@ -40,6 +40,7 @@ class Linkedin extends RestSource {
 		if (isset($model->request['uri']['path']))
 			$path = $model->request['uri']['path'];
 		$model->request['uri']['path'] = $path . $this->fieldSelectors($queryData['fields']);
+
 		return parent::read($model, $queryData);
 	}
 	
@@ -78,6 +79,6 @@ class Linkedin extends RestSource {
 	 */
 	public function request(&$model) {
 		$model->request['header']['x-li-format'] = 'json';
-		parent::request($model);
+		return parent::request($model);
 	}
 }
