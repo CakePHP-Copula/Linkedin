@@ -1,11 +1,12 @@
 # Installation
 
-1. Download / clone the following plugins: 
-* **LinkedIn** to _plugins/linkedin_
-* [HttpSocketOauth plugin](https://github.com/ProLoser/http_socket_oauth) (ProLoser fork) to _plugins/http_socket_oauth_
-* [Apis plugin](https://github.com/ProLoser/CakePHP-Api-Datasources) to _plugins/apis_
+### Step 1: Download / clone the following plugins: 
 
-2. Setup your `database.php`
+ * **LinkedIn** to _plugins/linkedin_
+ * [HttpSocketOauth plugin](https://github.com/ProLoser/http_socket_oauth) (ProLoser fork) to _plugins/http_socket_oauth_
+ * [Apis plugin](https://github.com/ProLoser/CakePHP-Api-Datasources) to _plugins/apis_
+
+### Step 2: Setup your `database.php`
 
 ```
 var $linkedin = array(
@@ -16,7 +17,7 @@ var $linkedin = array(
 );
 ```
 
-3. Install the Apis-OAuth Component for authentication
+### Step 3: Install the Apis-OAuth Component for authentication
 
 ```
 MyController extends AppController {
@@ -34,7 +35,9 @@ MyController extends AppController {
 }
 ```
 
-4. Use the datasource normally (check [wiki](https://github.com/ProLoser/CakePHP-LinkedIn/wiki) for available commands & usage)
+### Step 4: Use the datasource normally 
+Check the [wiki](https://github.com/ProLoser/CakePHP-LinkedIn/wiki) for available commands & usage
+
 ```
 Class MyModel extends AppModel {
 	var $useDbConfig = 'linkedin';
