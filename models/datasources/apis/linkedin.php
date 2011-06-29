@@ -1,30 +1,52 @@
 <?php
 /**
- * Flickr DataSource
+ * LinkedIn DataSource
  * 
  * [Short Description]
  *
- * @package default
+ * @package LinkedIn Plugin
  * @author Dean Sofer
  **/
 class Linkedin extends ApisSource {
 	
-	// TODO: Relocate to a dedicated schema file
-	var $_schema = array();
+	/**
+	 * The description of this data source
+	 *
+	 * @var string
+	 */
+	public $description = 'Linkedin DataSource Driver';
 	
-    protected $options = array(
-        'scheme'   				=> 'http',
-        'format'     			=> 'json',
-        'user_agent' 			=> 'CakePHP LinkedIn Datasource',
-        'http_port'  			=> 80,
-        'timeout'    			=> 10,
-        'login'      			=> null,
-        'token'      			=> null,
-        'param_separator'		=> '&',
-        'key_value_separator'	=> '=',
-		'permissions'			=> 'read', // read, write, delete
-    );
-
+	/**
+	 * Set the datasource to use OAuth
+	 *
+	 * @param array $config
+	 * @param HttpSocket $Http
+	 */
+	public function __construct($config) {
+		$config['method'] = 'OAuth';
+		parent::__construct($config);
+	}
+	
+	/**
+	 * Lets you use the fields in Model::find() for linkedin
+	 *
+	 * @param string $model 
+	 * @param string $queryData 
+	 * @return void
+	 * @author Dean Sofer
+	 */
+	public function read(&$model, $queryData = array()) {
+		$path = '';
+		if (isset($model->request['uri']['path'])) {
+			$path = $model->request['uri']['path'];
+		} elseif (!empty($queryData['path'])) {
+			$path = $queryData['path'];
+		}
+		$model->request['uri']['path'] = $path . $this->fieldSelectors($queryData['fields']);
+		
+		return parent::read($model, $queryData);
+	}
+	
 	/**
 	 * Formats an array of fields into the url-friendly nested format
 	 *
@@ -32,13 +54,13 @@ class Linkedin extends ApisSource {
 	 * @return string $fields
 	 * @link http://developer.linkedin.com/docs/DOC-1014
 	 */
-	function fieldSelectors($fields = array()) {
+	public function fieldSelectors($fields = array()) {
 		$result = '';
 		if (!empty($fields)) {
 			if (is_array($fields)) {
 				foreach ($fields as $group => $field) {
 					if (is_string($group)) {
-						$fields[$group] = $group . $this->fields($field);
+						$fields[$group] = $group . $this->fieldSelectors($field);
 					}
 				}
 				$fields = implode(',', $fields);
@@ -46,5 +68,18 @@ class Linkedin extends ApisSource {
 			$result .= ':(' . $fields . ')';
 		}
 		return $result;
+	}
+
+	/**
+	 * Just-In-Time callback for any last-minute request modifications
+	 *
+	 * @param object $model 
+	 * @param array $request 
+	 * @return array $request
+	 * @author Dean Sofer
+	 */
+	public function beforeRequest(&$model, $request) {
+		$request['header']['x-li-format'] = $this->options['format'];
+		return $request;
 	}
 }
