@@ -7,7 +7,7 @@
  *
  */
 $config['Apis']['Linkedin']['hosts'] = array(
-	'oauth' => 'api.linkedin.com/uas/oauth/',
+	'oauth' => 'api.linkedin.com/uas/oauth',
 	'rest' => 'api.linkedin.com/v1',
 );
 // http://developer.linkedin.com/docs/DOC-1251
