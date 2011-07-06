@@ -58,6 +58,14 @@ $config['Apis']['Linkedin']['read'] = array(
 );
 
 $config['Apis']['Linkedin']['write'] = array(
+	// http://developer.linkedin.com/docs/DOC-1044
+	'mailbox' => array(
+		'people/~/mailbox' => array(
+			'subject',
+			'body',
+			'recipients',
+		),
+	),
 );
 
 $config['Apis']['Linkedin']['update'] = array(

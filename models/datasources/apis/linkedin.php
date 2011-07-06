@@ -48,6 +48,22 @@ class Linkedin extends ApisSource {
 	}
 	
 	/**
+	 * Sets method = POST in request if not already set
+	 *
+	 * @param AppModel $model
+	 * @param array $fields Unused
+	 * @param array $values Unused
+	 */
+	public function create(&$model, $fields = null, $values = null) {
+		$data = array_combine($fields, $values);
+		$data = json_encode($data);
+		$model->request['body'] = $data;
+		$model->request['header']['content-type'] = 'application/json';
+		$fields = $values = null;
+		return parent::create($model, $fields, $values);
+	}
+	
+	/**
 	 * Formats an array of fields into the url-friendly nested format
 	 *
 	 * @param array $fields 
