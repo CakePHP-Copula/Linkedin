@@ -7,6 +7,7 @@
  * @package LinkedIn Plugin
  * @author Dean Sofer
  **/
+App::uses('ApisSource', 'Apis.Model/Datasource');
 class Linkedin extends ApisSource {
 	
 	/**
