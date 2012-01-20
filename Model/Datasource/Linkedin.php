@@ -36,8 +36,11 @@ class Linkedin extends ApisSource {
 	 * @return void
 	 * @author Dean Sofer
 	 */
-	public function read(&$model, $queryData = array()) {
+	public function read($model, $queryData = array()) {
 		$path = '';
+		if (!isset($model->request)) {
+			$model->request = array();
+		}
 		if (isset($model->request['uri']['path'])) {
 			$path = $model->request['uri']['path'];
 		} elseif (!empty($queryData['path'])) {
@@ -55,7 +58,7 @@ class Linkedin extends ApisSource {
 	 * @param array $fields Unused
 	 * @param array $values Unused
 	 */
-	public function create(&$model, $fields = null, $values = null) {
+	public function create($model, $fields = null, $values = null) {
 		$data = array_combine($fields, $values);
 		$data = json_encode($data);
 		$model->request['body'] = $data;
@@ -95,7 +98,7 @@ class Linkedin extends ApisSource {
 	 * @return array $request
 	 * @author Dean Sofer
 	 */
-	public function beforeRequest(&$model, $request) {
+	public function beforeRequest($model, $request) {
 		$request['header']['x-li-format'] = $this->options['format'];
 		return $request;
 	}
