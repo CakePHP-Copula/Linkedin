@@ -3,15 +3,14 @@
 ### Step 1: Download / clone the following plugins: 
 
  * **LinkedIn** to _plugins/linkedin_
- * [HttpSocketOauth plugin](https://github.com/ProLoser/http_socket_oauth) (ProLoser fork) to _plugins/http_socket_oauth_
- * [Apis plugin](https://github.com/ProLoser/CakePHP-Api-Datasources) to _plugins/apis_
+ * [HttpSocketOauth plugin](https://github.com/ProLoser/http_socket_oauth) (ProLoser fork) to _Plugin/HttpSocketOauth_
+ * [Apis plugin](https://github.com/ProLoser/CakePHP-Api-Datasources) to _Plugin/Apis_
 
 ### Step 2: Setup your `database.php`
 
 ```
 var $linkedin = array(
-	'datasource' => 'Apis.Apis',
-	'driver' => 'Linkedin.Linkedin',
+	'datasource' => 'Linkedin.Linkedin',
 	'login' => '<linkedin api key>',
 	'password' => '<linkedin api secret>',
 );
