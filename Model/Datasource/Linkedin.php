@@ -1,7 +1,7 @@
 <?php
 /**
  * LinkedIn DataSource
- * 
+ *
  * [Short Description]
  *
  * @package LinkedIn Plugin
@@ -9,30 +9,19 @@
  **/
 App::uses('ApisSource', 'Apis.Model/Datasource');
 class Linkedin extends ApisSource {
-	
+
 	/**
 	 * The description of this data source
 	 *
 	 * @var string
 	 */
 	public $description = 'Linkedin DataSource Driver';
-	
-	/**
-	 * Set the datasource to use OAuth
-	 *
-	 * @param array $config
-	 * @param HttpSocket $Http
-	 */
-	public function __construct($config) {
-		$config['method'] = 'OAuth';
-		parent::__construct($config);
-	}
-	
+
 	/**
 	 * Lets you use the fields in Model::find() for linkedin
 	 *
-	 * @param string $model 
-	 * @param string $queryData 
+	 * @param string $model
+	 * @param string $queryData
 	 * @return void
 	 * @author Dean Sofer
 	 */
@@ -47,10 +36,10 @@ class Linkedin extends ApisSource {
 			$path = $queryData['path'];
 		}
 		$model->request['uri']['path'] = $path . $this->fieldSelectors($queryData['fields']);
-		
+
 		return parent::read($model, $queryData);
 	}
-	
+
 	/**
 	 * Sets method = POST in request if not already set
 	 *
@@ -66,11 +55,11 @@ class Linkedin extends ApisSource {
 		$fields = $values = null;
 		return parent::create($model, $fields, $values);
 	}
-	
+
 	/**
 	 * Formats an array of fields into the url-friendly nested format
 	 *
-	 * @param array $fields 
+	 * @param array $fields
 	 * @return string $fields
 	 * @link http://developer.linkedin.com/docs/DOC-1014
 	 */
@@ -93,8 +82,8 @@ class Linkedin extends ApisSource {
 	/**
 	 * Just-In-Time callback for any last-minute request modifications
 	 *
-	 * @param object $model 
-	 * @param array $request 
+	 * @param object $model
+	 * @param array $request
 	 * @return array $request
 	 * @author Dean Sofer
 	 */

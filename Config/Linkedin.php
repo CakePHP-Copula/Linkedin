@@ -12,6 +12,7 @@ $config['Apis']['Linkedin']['hosts'] = array(
 );
 // http://developer.linkedin.com/docs/DOC-1251
 $config['Apis']['Linkedin']['oauth'] = array(
+	'version' => '1.0',
 	'authorize' => 'authorize', // Example URI: api.linkedin.com/uas/oauth/authorize
 	'request' => 'requestToken',
 	'access' => 'accessToken',
