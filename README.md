@@ -35,7 +35,8 @@ MyController extends AppController {
 ```
 
 ### Step 4: Use the datasource normally 
-Check the [wiki](https://github.com/ProLoser/CakePHP-LinkedIn/wiki) for available commands & usage
+Look inside the Config map for a list of endpoints or add more yourself!
+The `'fields'` key optionally lets you specify what fields you want returned. [Here is a list for reference](https://developer.linkedin.com/documents/profile-fields)
 
 ```php
 Class MyModel extends AppModel {
@@ -69,7 +70,6 @@ $data = $this->find('all', array(
 		'lastName' => 'dillan',
 		'company' => 'columbia records club',
 	),
-	// fields are optional to specify what data you want returned. [Here is a list for reference](https://developer.linkedin.com/documents/profile-fields)
 	'fields' => array(
 		'first-name', 'last-name',
 		'positions' => array('title', 'company'),
