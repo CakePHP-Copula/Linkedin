@@ -8,7 +8,7 @@
 
 ### Step 2: Setup your `database.php`
 
-```
+```php
 var $linkedin = array(
 	'datasource' => 'Linkedin.Linkedin',
 	'login' => '<linkedin api key>',
@@ -18,7 +18,7 @@ var $linkedin = array(
 
 ### Step 3: Install the Apis-OAuth Component for authentication
 
-```
+```php
 MyController extends AppController {
 	var $components = array(
 		'Apis.Oauth' => 'linkedin',
@@ -37,7 +37,7 @@ MyController extends AppController {
 ### Step 4: Use the datasource normally 
 Check the [wiki](https://github.com/ProLoser/CakePHP-LinkedIn/wiki) for available commands & usage
 
-```
+```php
 Class MyModel extends AppModel {
 
 	function readProfile() {
@@ -56,4 +56,23 @@ Class MyModel extends AppModel {
 		$this->setDataSource('default');
 	}
 }
+```
+
+You can also pass search parameters to certain endpoints:
+
+```php
+$data = $this->find('all', array(
+	'path' => 'people-search',
+	'conditions' => array(
+		'count' => 500,
+		'firstName' => 'bob',
+		'lastName' => 'dillan',
+		'company' => 'columbia records club',
+	),
+	// fields are optional to specify what data you want returned. [Here is a list for reference](https://developer.linkedin.com/documents/profile-fields)
+	'fields' => array(
+		'first-name', 'last-name',
+		'positions' => array('title', 'company'),
+	),
+));
 ```
