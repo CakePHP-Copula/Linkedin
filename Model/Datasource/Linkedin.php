@@ -30,13 +30,7 @@ class Linkedin extends ApisSource {
 		if (!isset($model->request)) {
 			$model->request = array();
 		}
-		if (isset($model->request['uri']['path'])) {
-			$path = $model->request['uri']['path'];
-		} elseif (!empty($queryData['path'])) {
-			$path = $queryData['path'];
-		}
-		$model->request['uri']['path'] = $path . $this->fieldSelectors($queryData['fields']);
-
+		$this->fields = $queryData['fields'];
 		return parent::read($model, $queryData);
 	}
 
@@ -89,6 +83,10 @@ class Linkedin extends ApisSource {
 	 */
 	public function beforeRequest($model, $request) {
 		$request['header']['x-li-format'] = $this->options['format'];
+		if (isset($this->fields)) {
+			$request['uri']['path'] .= $this->fieldSelectors($this->fields);
+			unset($this->fields);
+		}
 		return $request;
 	}
 }
