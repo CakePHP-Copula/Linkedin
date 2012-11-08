@@ -25,7 +25,7 @@ class Linkedin extends ApisSource {
 	 * @return void
 	 * @author Dean Sofer
 	 */
-	public function read($model, $queryData = array()) {
+	public function read(Model $model, $queryData = array(), $recursive = null) {
 		$path = '';
 		if (!isset($model->request)) {
 			$model->request = array();
@@ -41,7 +41,7 @@ class Linkedin extends ApisSource {
 	 * @param array $fields Unused
 	 * @param array $values Unused
 	 */
-	public function create($model, $fields = null, $values = null) {
+	public function create(Model $model, $fields = null, $values = null) {
 		$data = array_combine($fields, $values);
 		$data = json_encode($data);
 		$model->request['body'] = $data;
