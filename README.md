@@ -1,5 +1,7 @@
 # Installation
 
+[![API Testing](https://img.shields.io/badge/test%20this%20API%20on-RapidAPI.com-blue.svg)](https://rapidapi.com/package/LinkedIn/functions?utm_source=LinkedinGithub&utm_medium=button)
+
 ### Step 1: Download / clone the following plugins: 
 
  * **LinkedIn** to _Plugin/Linkedin_
